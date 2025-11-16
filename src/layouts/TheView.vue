@@ -1,7 +1,7 @@
 <template>
   <div class="layout-container d-flex">
     <TheSidebar />
-
+    <TheTree></TheTree>
     <main class="flex-grow-1 p-3">
       <router-view />
     </main>
@@ -10,6 +10,7 @@
 
 <script setup>
 import TheSidebar from './TheSidebar.vue'
+import TheTree from './TheTree.vue'
 </script>
 
 <style scoped>
