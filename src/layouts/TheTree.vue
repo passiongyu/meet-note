@@ -1,6 +1,16 @@
 <template>
   <div>
-    <Tree :value="nodes" class="w-full md:w-[30rem]"></Tree>
+    <Tree
+      :value="nodes"
+      :selectionMode="'single'"
+      @node-select="onClickNodeSelect"
+      class="w-full md:w-[30rem]"
+    >
+      <template #default="slotProps">
+        <!-- <div>{{ slotProps.node }}</div> -->
+        <span style="color: blue">{{ slotProps.node.label }}</span>
+      </template>
+    </Tree>
   </div>
 </template>
 
@@ -48,6 +58,10 @@ const nodes = ref([
   },
   { key: '1', label: '폴더2', data: 'Documents Folder2', icon: 'pi pi-fw pi-inbox' },
 ])
+
+const onClickNodeSelect = () => {
+  alert('hello')
+}
 </script>
 
 <style lang="scss" scoped></style>
