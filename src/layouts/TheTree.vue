@@ -8,6 +8,8 @@
     >
       <template #default="slotProps">
         <!-- <div>{{ slotProps.node }}</div> -->
+        {{ slotProps.node.label }}
+        <button @click.prevent="test"></button>
         <span style="color: blue">{{ slotProps.node.label }}</span>
       </template>
     </Tree>
@@ -60,7 +62,11 @@ const nodes = ref([
 ])
 
 const onClickNodeSelect = () => {
-  alert('hello')
+  alert('목록 조회')
+}
+
+const test = () => {
+  alert('버튼 클릭')
 }
 </script>
 
