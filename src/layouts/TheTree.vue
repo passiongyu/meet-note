@@ -7,9 +7,6 @@
       class="w-full md:w-[30rem]"
     >
       <template #default="slotProps">
-        <!-- <div>{{ slotProps.node }}</div> -->
-        {{ slotProps.node.label }}
-        <button @click.prevent="test"></button>
         <span style="color: blue">{{ slotProps.node.label }}</span>
       </template>
     </Tree>
