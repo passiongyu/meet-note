@@ -1,7 +1,7 @@
 <template>
   <div class="layout-container d-flex">
     <TheSidebar />
-    <TheTree></TheTree>
+
     <main class="flex-grow-1 p-3">
       <router-view />
     </main>
