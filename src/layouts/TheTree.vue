@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Tree :value="nodes" selectionMode="single">
+    <Tree :value="nodes" selectionMode="single" @node-select="onNodeSelect">
       <template #default="slotProps">
         <b>{{ slotProps.node.label }}</b>
       </template>
@@ -11,24 +11,25 @@
 <script setup>
 import Tree from 'primevue/tree'
 import { ref } from 'vue'
+const emit = defineEmits(['tree-node-select'])
 
 const nodes = ref(null)
 nodes.value = [
   {
-    key: '0',
+    key: '23',
     label: '전체노트',
     data: 'Total Note',
     icon: 'pi pi-home',
     children: [
       {
         key: '0-0',
-        label: 'Work',
+        label: '개인폴더1',
         data: 'Work Folder',
         icon: 'pi pi-folder',
       },
       {
         key: '0-1',
-        label: 'Home',
+        label: '개인폴더2',
         data: 'Home Folder',
         icon: 'pi pi-folder',
       },
@@ -41,6 +42,11 @@ nodes.value = [
     icon: 'pi pi-trash',
   },
 ]
+
+const onNodeSelect = (data) => {
+  console.log(data.key)
+  emit('tree-node-select', data.key)
+}
 </script>
 
 <style scoped></style>

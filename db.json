@@ -1,0 +1,52 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "notes": {
+    "code": "200",
+    "message": "SUCCESS",
+    "data": [
+      {
+        "noteId": 1,
+        "title": "위스퍼 회의록1",
+        "folderId": 23,
+        "status": "완료",
+        "createdAt": "2025-11-24",
+        "durationMinutes": "59",
+        "updateDt": "2025-11-25"
+      },
+      {
+        "noteId": 2,
+        "title": "위스퍼 회의록2",
+        "folderId": 23,
+        "status": "업로드완료",
+        "createdAt": "2025-11-27",
+        "durationMinutes": "39",
+        "updateDt": "2025-11-27"
+      },
+      {
+        "noteId": 3,
+        "title": "위스퍼 회의록3",
+        "folderId": 23,
+        "status": "변환대기",
+        "createdAt": "2025-11-29",
+        "durationMinutes": "48",
+        "updateDt": "2025-11-29"
+      }
+    ]
+  }
+}

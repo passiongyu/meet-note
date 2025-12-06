@@ -12,12 +12,17 @@
       </li>
     </ul> -->
 
-    <TheTree></TheTree>
+    <TheTree @tree-node-select="onTreeSelect"></TheTree>
   </div>
 </template>
 
 <script setup>
 import TheTree from '@/layouts/TheTree.vue'
+const emit = defineEmits(['tree-node-select'])
+
+const onTreeSelect = (key) => {
+  emit('tree-node-select', key)
+}
 </script>
 
 <style scoped>
