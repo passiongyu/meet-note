@@ -2,19 +2,22 @@
   <TheHeader></TheHeader>
   <div class="app-div">
     <TheSidebar @tree-node-select="onTreeNodeSelect" />
-    <TheView />
+    <TheView :noteList="noteList" />
   </div>
 </template>
 
 <script setup>
+import { ref } from 'vue'
 import getNotes from './api/post'
 import TheHeader from './layouts/TheHeader.vue'
 import TheSidebar from './layouts/TheSidebar.vue'
 import TheView from './layouts/TheView.vue'
 
+const noteList = ref(null)
+
 const onTreeNodeSelect = async (key) => {
   const { data, headers } = await getNotes()
-  console.log(data)
+  noteList.value = data
 }
 </script>
 

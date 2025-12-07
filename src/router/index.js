@@ -1,10 +1,10 @@
 import HomeView from '@/views/HomeView.vue'
-import PostListView from '@/views/posts/PostListView.vue'
+import NoteListView from '@/views/posts/NoteListView.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
   { path: '/', name: 'Home', component: HomeView },
-  { path: '/posts', name: 'PostList', component: PostListView },
+  { path: '/notes', name: 'NoteList', component: NoteListView },
 ]
 
 const router = createRouter({

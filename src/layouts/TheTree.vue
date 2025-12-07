@@ -22,13 +22,13 @@ nodes.value = [
     icon: 'pi pi-home',
     children: [
       {
-        key: '0-0',
+        key: '23-1',
         label: '개인폴더1',
         data: 'Work Folder',
         icon: 'pi pi-folder',
       },
       {
-        key: '0-1',
+        key: '23-2',
         label: '개인폴더2',
         data: 'Home Folder',
         icon: 'pi pi-folder',

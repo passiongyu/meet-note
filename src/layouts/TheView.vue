@@ -7,8 +7,23 @@
 </template>
 
 <script setup>
-import TheSidebar from './TheSidebar.vue'
-import TheTree from './TheTree.vue'
+import { watch, watchEffect } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+const props = defineProps({
+  noteList: {
+    type: Object,
+  },
+})
+
+watchEffect(() => {
+  console.log('noteList render', props.noteList)
+  router.push({ name: 'NoteList', params: {} })
+})
+
+watch()
 </script>
 
 <style scoped>
