@@ -18,12 +18,10 @@ const props = defineProps({
   },
 })
 
-watchEffect(() => {
-  console.log('noteList render', props.noteList)
-  router.push({ name: 'NoteList', params: {} })
-})
-
-watch()
+// watchEffect(() => {
+//   console.log('noteList render', props.noteList)
+//   router.push({ name: 'NoteList', params: {} })
+// })
 </script>
 
 <style scoped>

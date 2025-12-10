@@ -12,12 +12,13 @@
 import getNotes from '@/api/post'
 import NoteItem from '@/components/notes/NoteItem.vue'
 import { onMounted, reactive, ref } from 'vue'
+import { useRouter } from 'vue-router'
 
-let noteList = reactive({})
+let noteList = ref([])
 
 onMounted(async () => {
   const { data, headers } = await getNotes()
-  noteList = data.data
+  noteList.value = data.data
 
   console.log(noteList)
 })
