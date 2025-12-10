@@ -1,16 +1,32 @@
 <template>
-  <div>PostList</div>
+  <h2>노트 목록</h2>
+
+  <div class="list-div">
+    <div v-for="obj in noteList">
+      <NoteItem :noteId="obj.noteId" :title="obj.title" :createdAt="obj.createdAt"></NoteItem>
+    </div>
+  </div>
 </template>
 
 <script setup>
 import getNotes from '@/api/post'
-import { onMounted } from 'vue'
+import NoteItem from '@/components/notes/NoteItem.vue'
+import { onMounted, reactive, ref } from 'vue'
+
+let noteList = reactive({})
 
 onMounted(async () => {
   const { data, headers } = await getNotes()
-  console.log(data)
-  // console.log(headers)
+  noteList = data.data
+
+  console.log(noteList)
 })
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+.list-div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+</style>
