@@ -48,5 +48,9 @@
         "updateDt": "2025-11-29"
       }
     ]
+  },
+  "upload": {
+    "code": "200",
+    "message": "SUCCESS"
   }
 }

@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import getNotes from '@/api/post'
+import { getNotes } from '@/api/post'
 import NoteItem from '@/components/notes/NoteItem.vue'
 import { onMounted, reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'

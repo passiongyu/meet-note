@@ -8,10 +8,10 @@
 
 <script setup>
 import { ref } from 'vue'
-import getNotes from './api/post'
 import TheHeader from './layouts/TheHeader.vue'
 import TheSidebar from './layouts/TheSidebar.vue'
 import TheView from './layouts/TheView.vue'
+import { getNotes } from './api/post'
 
 const noteList = ref(null)
 

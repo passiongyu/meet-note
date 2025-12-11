@@ -1,5 +1,10 @@
 import axios from 'axios'
 
-export default function getNotes() {
+export function getNotes() {
   return axios.get('http://localhost:5100/notes')
+}
+
+//실제로 post
+export function uploadSoundFile() {
+  return axios.get('http://localhost:5100/upload')
 }
