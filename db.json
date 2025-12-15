@@ -52,5 +52,39 @@
   "upload": {
     "code": "200",
     "message": "SUCCESS"
+  },
+  "convert": {
+    "code": "200",
+    "message": "SUCCESS",
+    "data": {
+      "noteId": "12",
+      "title": "회의제목1",
+      "script": [
+        {
+          "startTime": "00:00",
+          "endTime": "01:30",
+          "speaker": "sp1",
+          "message": "안녕하세요. 회의 시작하겠습니다."
+        },
+        {
+          "startTime": "01:30",
+          "endTime": "03:30",
+          "speaker": "sp2",
+          "message": "네 회의 시작하시죠."
+        },
+        {
+          "startTime": "03:30",
+          "endTime": "04:30",
+          "speaker": "sp1",
+          "message": "네 오늘 회의 안건은 화면 설계입니다."
+        },
+        {
+          "startTime": "04:30",
+          "endTime": "05:30",
+          "speaker": "sp3",
+          "message": "네 제가 자료를 준비했습니다."
+        }
+      ]
+    }
   }
 }

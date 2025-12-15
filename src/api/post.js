@@ -8,3 +8,8 @@ export function getNotes() {
 export function uploadSoundFile() {
   return axios.get('http://localhost:5100/upload')
 }
+
+//실제로 post
+export function convertToText() {
+  return axios.get('http://localhost:5100/convert')
+}
