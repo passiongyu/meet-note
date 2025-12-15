@@ -21,19 +21,12 @@
         <input type="text" style="margin-left: 10px;border-radius: 8px;"></input>
     </div>
     <div style="margin-top: 10px;" class="note-content-div">
-        <label>회의내용</label>
+        <label style="font-size: 20px;">회의내용</label>
         <div style="margin-top: 10px;">
-            <div class="speaker-message-div">
-                <div>스피커1</div>
-                <div>메시지1</div>
+            <div v-for="convertObj in convertData" class="speaker-message-div">
+                <div class="speaker-div">{{ convertObj.speaker }}</div>
+                <div class="message-div">{{ convertObj.message }}</div>
             </div>
-            <div class="speaker-message-div">
-                <div>스피커2</div>
-                <div>메시지2</div>
-            </div>
-            
-            
-
         </div>
         <div><NoteTextContent></NoteTextContent></div>
     </div>
@@ -47,6 +40,7 @@ import { uploadSoundFile, convertToText } from '@/api/post'
 
 const isUploadComplete = ref(false);
 const isConvertComplete = ref(false);
+const convertData = ref([]);
 
 const onUploadSoundFile = async () => {
     const result = await uploadSoundFile();
@@ -64,7 +58,8 @@ const onConvert = async () => {
         isConvertComplete.value =true;
     }
     
-    console.log(result.data);
+    console.log(result.data.data.script);
+    convertData.value = result.data.data.script;
 }
 
 
@@ -88,6 +83,10 @@ const onConvert = async () => {
 }
 .speaker-message-div {
     display: flex;
+    background-color: rgb(224, 231, 239);
+    border-radius: 8px;
+    margin-top: 10px;
+
 }
 
 .note-content-div{
@@ -95,6 +94,11 @@ const onConvert = async () => {
     border-radius: 8px;
     padding-left: 10px;
     padding-top: 10px;
+    padding-right: 10px;
+    height: 500px;
 }
 
+.message-div {
+    margin-left: 10px;
+}
 </style>
