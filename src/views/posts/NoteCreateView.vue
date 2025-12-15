@@ -21,11 +21,18 @@
         <input type="text" style="margin-left: 10px;border-radius: 8px;"></input>
     </div>
     <div style="margin-top: 10px;" class="note-content-div">
-        <label style="font-size: 20px;">회의내용</label>
+        <div style="display: flex;justify-content: space-between;">
+            <label style="font-size: 20px;">회의내용</label>
+            <button class="edit-button" @click="editNoteContent">편집</button>
+        </div>
         <div style="margin-top: 10px;">
             <div v-for="convertObj in convertData" class="speaker-message-div">
-                <div class="speaker-div">{{ convertObj.speaker }}</div>
-                <div class="message-div">{{ convertObj.message }}</div>
+                <div class="speaker-div">
+                    <input class="speaker-input" type="text" :value="convertObj.speaker"></input>
+                </div>
+                <div class="message-div">
+                    <textarea class="message-textarea">{{ convertObj.message }}</textarea>    
+                </div>
             </div>
         </div>
         <div><NoteTextContent></NoteTextContent></div>
@@ -60,6 +67,10 @@ const onConvert = async () => {
     
     console.log(result.data.data.script);
     convertData.value = result.data.data.script;
+}
+
+const editNoteContent = () => {
+    alert('편집');
 }
 
 
@@ -100,5 +111,27 @@ const onConvert = async () => {
 
 .message-div {
     margin-left: 10px;
+}
+
+.speaker-input {
+    width: 40px;
+    border: none;
+    border-radius: 8px;
+}
+
+.edit-button {
+    border: none;
+    border-radius: 8px;
+    background-color: beige;
+    
+}
+
+.message-textarea {
+    width: 400px;
+    border:none;
+    border-radius: 8px;
+    padding-top: 10px;
+    padding-left: 5px;
+    
 }
 </style>
