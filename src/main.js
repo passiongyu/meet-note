@@ -12,11 +12,22 @@ import Aura from '@primeuix/themes/aura'
 /* import 'primevue/resources/themes/aura-light-blue/theme.css'
 import 'primevue/resources/primevue.min.css' */
 
-createApp(App)
-  .use(router)
-  .use(PrimeVue, {
-    theme: {
-      preset: Aura,
-    },
-  })
-  .mount('#app')
+async function enableMocking() {
+  if (import.meta.env.MODE !== 'development') {
+    return
+  }
+
+  const { worker } = await import('./mocks/browser')
+  return worker.start()
+}
+
+enableMocking().then(() => {
+  createApp(App)
+    .use(router)
+    .use(PrimeVue, {
+      theme: {
+        preset: Aura,
+      },
+    })
+    .mount('#app')
+})

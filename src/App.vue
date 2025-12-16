@@ -11,12 +11,15 @@ import { ref } from 'vue'
 import TheHeader from './layouts/TheHeader.vue'
 import TheSidebar from './layouts/TheSidebar.vue'
 import TheView from './layouts/TheView.vue'
-import { getNotes } from './api/post'
+import { getNotes, getPosts } from './api/post'
 
 const noteList = ref(null)
 
 const onTreeNodeSelect = async (key) => {
   const { data, headers } = await getNotes()
+
+  const result = await getPosts()
+  console.log(result.data)
   noteList.value = data
 }
 </script>
