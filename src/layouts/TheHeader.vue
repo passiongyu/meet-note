@@ -2,7 +2,7 @@
   <header>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">MgNote</a>
+        <a class="navbar-brand" href="#">D'Note</a>
         <button
           class="navbar-toggler"
           type="button"

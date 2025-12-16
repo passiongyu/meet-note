@@ -1,6 +1,6 @@
 <template>
-  <div class="sound-file-div">
-    <span style="color: white;">음성파일을 등록하세요</span>
+  <div class="sound-file-div" v-if="!isConvertComplete">
+    <span style="color: white;">파일업로드를 통해 음성기록을 만들어보세요.</span>
     <div style="margin-top: 10px;">
         <input  type="file" style="border-radius: 10px;"></input>
     </div>
@@ -10,28 +10,35 @@
     </div>
   </div>
   
-  <br></br>
+  
   <div v-if="isConvertComplete" class="note-regist-content-div">
     <div>
         <label>제목</label>
         <input type="text" style="margin-left: 10px;border-radius: 8px;"></input>
     </div>
     <div style="margin-top: 10px;">
-        <label>날짜</label>
+        <label>회의일자</label>
+        <input type="Date" style="margin-left: 10px;border-radius: 8px;"></input>
+    </div>
+    <div style="margin-top: 10px;">
+        <label>참석자</label>
         <input type="text" style="margin-left: 10px;border-radius: 8px;"></input>
+    </div>
+    <div style="margin-top: 10px;">
+        <label>음성기록</label>
     </div>
     <div style="margin-top: 10px;" class="note-content-div">
         <div style="display: flex;justify-content: space-between;">
             <label style="font-size: 20px;">회의내용</label>
-            <button class="edit-button" @click="editNoteContent">편집</button>
+            <button class="edit-button" @click="editNoteContent">{{ isEditing ? '완료' : '편집' }}</button>
         </div>
         <div style="margin-top: 10px;">
             <div v-for="convertObj in convertData" class="speaker-message-div">
                 <div class="speaker-div">
-                    <input class="speaker-input" type="text" :value="convertObj.speaker"></input>
+                    <input class="speaker-input" type="text" :value="convertObj.speaker" :readonly="isSpeakerReadOnly"></input>
                 </div>
                 <div class="message-div">
-                    <textarea class="message-textarea">{{ convertObj.message }}</textarea>    
+                    <textarea class="message-textarea" :readonly="isMessageReadonly">{{ convertObj.message }}</textarea>    
                 </div>
             </div>
         </div>
@@ -41,13 +48,23 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { computed, readonly, ref } from 'vue';
 import NoteTextContent from './NoteTextContent.vue';
 import { uploadSoundFile, convertToText } from '@/api/post'
 
 const isUploadComplete = ref(false);
 const isConvertComplete = ref(false);
 const convertData = ref([]);
+const isSpeakerReadOnly = ref(true);
+const isEditing = ref(false);
+
+const isMessageReadonly = computed(() => {
+    if(isEditing.value) {
+        return false;
+    }else {
+        return true;
+    }
+});
 
 const onUploadSoundFile = async () => {
     const result = await uploadSoundFile();
@@ -70,8 +87,16 @@ const onConvert = async () => {
 }
 
 const editNoteContent = () => {
-    alert('편집');
+    isSpeakerReadOnly.value = false;
+    if(isEditing.value) {
+        isEditing.value = false;
+    } else {
+        isEditing.value = true;
+    }
+    
 }
+
+
 
 
 
@@ -87,6 +112,7 @@ const editNoteContent = () => {
     display: flex;
     flex-direction: column;
     border-radius: 8px;
+    margin-bottom: 10px;
 }
 .note-regist-content-div{
     display: flex;

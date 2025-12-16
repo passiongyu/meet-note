@@ -13,3 +13,7 @@ export function uploadSoundFile() {
 export function convertToText() {
   return axios.get('http://localhost:5100/convert')
 }
+
+export function patchNoteInfo(noteId) {
+  return axios.patch(`http://localhost:5100/notes/${noteId}`)
+}
