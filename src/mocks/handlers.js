@@ -22,6 +22,16 @@ export const handlers = [
     )
   }),
 
+  http.patch('/api/meetNote/:noteId', async ({ request, params }) => {
+    const bodyData = await request.json()
+    const { noteId } = params
+
+    return HttpResponse.json(
+      { status: 200, result: 'SUCCESS', message: 'OK', data: bodyData },
+      { status: 200 },
+    )
+  }),
+
   http.get('/api/meetNote/detail', () => {
     return HttpResponse.json(
       {

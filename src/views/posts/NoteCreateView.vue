@@ -37,10 +37,10 @@
                 <div style="margin-top: 10px;">
                     <div v-for="convertObj in convertData" class="speaker-message-div">
                         <div class="speaker-div">
-                            <input class="speaker-input" type="text" :value="convertObj.speaker" :readonly="isSpeakerReadOnly"></input>
+                            <input class="speaker-input" type="text"  v-model="convertObj.speaker" :readonly="isSpeakerReadOnly"></input>
                         </div>
                         <div class="message-div">
-                            <textarea class="message-textarea" :readonly="isMessageReadonly">{{ convertObj.text }}</textarea>    
+                            <textarea class="message-textarea" v-model="convertObj.text" :readonly="isMessageReadonly">{{ convertObj.text }}</textarea>    
                         </div>
                     </div>
                 </div>
@@ -48,7 +48,7 @@
             </div>
         </div>
     </div>
-    <div class="right-content-div">
+    <div v-if="isRightContentVisible" class="right-content-div">
         <div class="ai-button-div">
             <h3>AI요약</h3>
             <button  type="button" class="btn btn-primary" >요약하기</button>
@@ -67,15 +67,18 @@
 </template>
 
 <script setup>
-import { computed, readonly, ref } from 'vue';
+import { computed, ref } from 'vue';
 import NoteTextContent from './NoteTextContent.vue';
-import { uploadSoundFile, convertToText, getNote } from '@/api/post'
+import { uploadSoundFile, convertToText, getNote, patchNoteInfo } from '@/api/post'
 
 const isUploadComplete = ref(false);
 const isConvertComplete = ref(false);
 const convertData = ref([]);
 const isSpeakerReadOnly = ref(true);
 const isEditing = ref(false);
+const isRightContentVisible = ref(false);
+
+
 
 const isMessageReadonly = computed(() => {
     if(isEditing.value) {
@@ -99,22 +102,31 @@ const onConvert = async () => {
     const {data} = await convertToText();
     if(data.status == 200) {
         alert("변환 완료");
-        isConvertComplete.value =true;
+        isConvertComplete.value = true;
+        isRightContentVisible.value = true;
     }
     
     const result = await getNote();
     convertData.value = result.data.data.transcriptText;
 }
 
-const editNoteContent = () => {
+const editNoteContent = async () => {
     isSpeakerReadOnly.value = false;
     if(isEditing.value) {
         isEditing.value = false;
+        //makeScriptJson();
+        let modifiedData = convertData.value;
+        const result = await patchNoteInfo(2, modifiedData);  //수정api날리기
+        console.log(result);
     } else {
         isEditing.value = true;
+        
     }
     
 }
+
+
+
 
 
 

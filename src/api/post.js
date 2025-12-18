@@ -20,6 +20,6 @@ export function getNote() {
   return axios.get('http://localhost:5174/api/meetNote/detail')
 }
 
-export function patchNoteInfo(noteId) {
-  return axios.patch(`http://localhost:5174/notes/${noteId}`)
+export function patchNoteInfo(noteId, data) {
+  return axios.patch(`http://localhost:5174/api/meetNote/${noteId}`, data)
 }
