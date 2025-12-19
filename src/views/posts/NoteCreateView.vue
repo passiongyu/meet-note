@@ -11,12 +11,10 @@
                 <button v-if="isUploadComplete && !isConvertComplete"  type="button" class="btn btn-dark" @click="onConvert">변환하기</button>
             </div>
         </div>
-    
-    
         <div v-if="isConvertComplete" class="note-regist-content-div">
             <div>
                 <label>제목</label>
-                <input type="text" style="margin-left: 10px;border-radius: 8px;"></input>
+                <input type="text" v-model.lazy="title" style="margin-left: 10px;border-radius: 8px;"></input>
             </div>
             <div style="margin-top: 10px;">
                 <label>회의일자</label>
@@ -37,7 +35,7 @@
                 <div style="margin-top: 10px;">
                     <div v-for="convertObj in convertData" class="speaker-message-div">
                         <div class="speaker-div">
-                            <input class="speaker-input" type="text"  v-model="convertObj.speaker" :readonly="isSpeakerReadOnly"></input>
+                            <input class="speaker-input" type="text"   v-model="convertObj.speaker" :readonly="isSpeakerReadOnly"></input>
                         </div>
                         <div class="message-div">
                             <textarea class="message-textarea" v-model="convertObj.text" :readonly="isMessageReadonly">{{ convertObj.text }}</textarea>    
@@ -67,9 +65,10 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 import NoteTextContent from './NoteTextContent.vue';
 import { uploadSoundFile, convertToText, getNote, patchNoteInfo } from '@/api/post'
+
 
 const isUploadComplete = ref(false);
 const isConvertComplete = ref(false);
@@ -77,8 +76,12 @@ const convertData = ref([]);
 const isSpeakerReadOnly = ref(true);
 const isEditing = ref(false);
 const isRightContentVisible = ref(false);
+const title = ref("");
 
 
+watch(title, async () => {
+    alert(title.value);
+})
 
 const isMessageReadonly = computed(() => {
     if(isEditing.value) {
@@ -188,7 +191,7 @@ const editNoteContent = async () => {
 }
 .speaker-message-div {
     display: flex;
-    background-color: rgb(224, 231, 239);
+    background-color: rgb(180, 205, 235);
     border-radius: 8px;
     margin-top: 10px;
 
