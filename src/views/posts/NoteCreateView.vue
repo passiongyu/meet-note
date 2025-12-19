@@ -14,15 +14,15 @@
         <div v-if="isConvertComplete" class="note-regist-content-div">
             <div>
                 <label>제목</label>
-                <input type="text" v-model.lazy="title" style="margin-left: 10px;border-radius: 8px;"></input>
+                <input type="text" v-model.lazy="form.title" style="margin-left: 10px;border-radius: 8px;"></input>
             </div>
             <div style="margin-top: 10px;">
                 <label>회의일자</label>
-                <input type="Date" style="margin-left: 10px;border-radius: 8px;"></input>
+                <input type="Date" v-model.lazy="form.meetDate" style="margin-left: 10px;border-radius: 8px;"></input>
             </div>
             <div style="margin-top: 10px;">
                 <label>참석자</label>
-                <input type="text" style="margin-left: 10px;border-radius: 8px;"></input>
+                <input type="text" v-model.lazy="form.participants" style="margin-left: 10px;border-radius: 8px;"></input>
             </div>
             <div style="margin-top: 10px;">
                 <label>음성기록</label>
@@ -65,7 +65,7 @@
 </template>
 
 <script setup>
-import { computed, ref, watch } from 'vue';
+import { computed, reactive, ref, watch } from 'vue';
 import NoteTextContent from './NoteTextContent.vue';
 import { uploadSoundFile, convertToText, getNote, patchNoteInfo } from '@/api/post'
 
@@ -76,11 +76,16 @@ const convertData = ref([]);
 const isSpeakerReadOnly = ref(true);
 const isEditing = ref(false);
 const isRightContentVisible = ref(false);
-const title = ref("");
+const form = reactive({
+    title: '',
+    meetDate: '',
+    participants:''
+});
 
 
-watch(title, async () => {
-    alert(title.value);
+watch(form, async () => {
+    alert(form.title);
+    alert(form.participants);
 })
 
 const isMessageReadonly = computed(() => {
