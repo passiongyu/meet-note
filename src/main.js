@@ -9,6 +9,7 @@ import PrimeVue from 'primevue/config'
 import 'primeicons/primeicons.css'
 
 import Aura from '@primeuix/themes/aura'
+import { createPinia } from 'pinia'
 /* import 'primevue/resources/themes/aura-light-blue/theme.css'
 import 'primevue/resources/primevue.min.css' */
 
@@ -23,6 +24,7 @@ async function enableMocking() {
 
 enableMocking().then(() => {
   createApp(App)
+    .use(createPinia())
     .use(router)
     .use(PrimeVue, {
       theme: {
