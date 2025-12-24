@@ -11,6 +11,13 @@
                 <button v-if="isUploadComplete && !isConvertComplete"  type="button" class="btn btn-dark" @click="onConvert">변환하기</button>
             </div>
         </div>
+        <div>
+            <audio id="test" src="/public/soundfile/testSoundFile.m4a" controls ref="audio" @loadedmetadata="onLoaded"></audio>
+            <button @click="playAudio">시작</button>
+            <button @click="pauseAudio">멈춤</button>
+            <button @click="changeAudio">시간변경</button>
+
+        </div>
         <div v-if="isConvertComplete" class="note-regist-content-div">
             <div>
                 <label>제목</label>
@@ -83,9 +90,29 @@ const form = reactive({
 });
 
 
+const audio = ref(null);
+
+const playAudio = () => {
+    audio.value.play();
+}
+
+const pauseAudio = () => {
+    audio.value.pause();
+}
+
+const changeAudio = () => {
+    audio.value.currentTime =3;
+    audio.value.play();
+}
+
+const onLoaded = () => {
+    audio.value.currentTime = 30;
+    console.log(audio.value.currentTime);
+}
+
 watch(form, async () => {
-    alert(form.title);
-    alert(form.participants);
+    //api 날리기 
+    
 })
 
 const isMessageReadonly = computed(() => {
